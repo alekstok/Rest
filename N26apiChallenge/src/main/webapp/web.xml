@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="3.0">
+  <display-name>Rest API for N26</display-name>
+	<description>
+		Description...
+	</description>
+
+	<!--  -->
+	<servlet>
+    	<servlet-name>jersey-serlvet</servlet-name>
+
+ 	   <servlet-class>
+   	     com.sun.jersey.spi.container.servlet.ServletContainer
+  	  </servlet-class>
+
+  	  <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>webservice</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jersey-serlvet</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Demo App</web-resource-name>
+			<url-pattern>/*</url-pattern>
+			<http-method>PUT</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<login-config>
+		<auth-method>BASIC</auth-method>
+		<realm-name>Demo App</realm-name>
+	</login-config>
+	<security-role>
+		<description>Role for restricted resources</description>
+		<role-name>admin</role-name>
+	</security-role>
+	
+  
+</web-app>
