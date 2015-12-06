@@ -1,0 +1,26 @@
+Things I considered before starting writing code: 
+•	design, how the code should look like
+•	what tolls will I need (which server, frameworks, others)
+•	consider the code & data storage architecture (every information we need, should be get in an effective way)
+
+
+Data Storage:
+•	I decided to use 2 data containers: 
+o	Map with transaction Id as a key, and a Transaction object (containing value, type & parent) as a value
+o	Map with parent – children relation
+•	Both containers are static, although it’s not multi-thread friendly, (I assumed it would be acceptable for this challenge)
+•	I decided to use maps and Sets as containers to avoid duplication (transaction Id should be unique), 
+•	Both containers are updated while adding / editing transaction (to have the data in both containers synchronized)
+
+Asymptotic behavior:
+Taking into consideration asymptotic behavior, I tried to create an architecture, where, functions are simple and grabbing information is effective. 
+•	Minimizing amount of loops usage (nested loops not used at all) 
+•	Recursion – to increase readability and maintenance of code (used once for descendants check), 
+•	Avoiding infinite loops - To avoid situation where transaction Parent becomes its own child, each transaction Id is checked for descendants, and in such case, transaction is not added 
+
+
+Server, frameworks & other:
+•	Project created as a maven project 
+•	Server used: Jetty 7
+•	Server needs to be configured to enable PUT requests, username & password were added to configuration, to restrict its usage
+•	Framework for unit tests: Junit (v4)
